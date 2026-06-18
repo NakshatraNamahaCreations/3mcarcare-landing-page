@@ -1,12 +1,14 @@
 'use client';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { useGSAP } from '@gsap/react';
 import { gsap } from '@/lib/gsap';
+import EnquireModal from '@/components/EnquireModal/EnquireModal';
 import styles from './Hero.module.css';
 
 export default function Hero({ ready }) {
   const root = useRef(null);
   const cue = useRef(null);
+  const [enquireOpen, setEnquireOpen] = useState(false);
 
   // Intro — time-based, runs once the preloader signals `ready`. No scroll triggers.
   useGSAP(
@@ -46,14 +48,21 @@ export default function Hero({ ready }) {
         <p className={styles.sub}>
           Long-lasting, invisible defense against road debris, weather, and everyday wear — engineered for the cars you love most.
         </p>
-        <a href="#services" className={`btn-gold ${styles.cta}`} data-cursor="hover">
-          <span>Book PPF Installation</span><i className="arr" />
-        </a>
+        <button
+          type="button"
+          className={`btn-gold ${styles.cta}`}
+          data-cursor="hover"
+          onClick={() => setEnquireOpen(true)}
+        >
+          <span>Book a Slot</span><i className="arr" />
+        </button>
       </div>
 
       <div className={styles.scrollCue} ref={cue}>
         <span>Scroll</span><span className={styles.cueLine} />
       </div>
+
+      <EnquireModal open={enquireOpen} onClose={() => setEnquireOpen(false)} />
     </section>
   );
 }
