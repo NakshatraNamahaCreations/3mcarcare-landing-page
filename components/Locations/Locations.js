@@ -20,7 +20,7 @@ export default function Locations() {
   }, { scope: root });
 
   return (
-    <section className="panel" id="locations" ref={root} style={{ background: 'var(--panel)' }}>
+    <section className="panel" id="studios" ref={root} style={{ background: 'var(--panel)' }}>
       <span className="v-edge l" /><span className="v-edge r" />
       <span className="section-tag">02 — Studios</span>
       <div className="inner">
@@ -30,6 +30,7 @@ export default function Locations() {
           </h2>
           <p className={styles.intro}>Backed by a century of 3M innovation, our certified experts deliver lasting protection at both North and South Bangalore locations.</p>
         </div>
+        
 
         <div className={styles.grid}>
           {LOCS.map((l) => (

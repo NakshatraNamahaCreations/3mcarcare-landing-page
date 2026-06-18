@@ -5,7 +5,7 @@ import EnquireModal from '@/components/EnquireModal/EnquireModal';
 import styles from './Navbar.module.css';
 
 const LINKS = [
-  { id: 'locations', label: 'Studios' },
+  { id: 'studios', label: 'Studios' },
   { id: 'services', label: 'Services' },
   { id: 'why', label: 'Why 3M' },
   { id: 'gallery', label: 'Gallery' },
@@ -29,7 +29,9 @@ export default function Navbar() {
     e.preventDefault();
     setOpen(false);
     const target = document.getElementById(id);
-    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (!target) return;
+    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    window.history.pushState(null, '', `#${id}`);
   }, []);
 
   return (
