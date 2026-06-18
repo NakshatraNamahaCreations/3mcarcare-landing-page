@@ -24,7 +24,7 @@ export default function WhyChoose() {
   }, { scope: root });
 
   return (
-    <section className="panel" id="why" ref={root} style={{ background: 'var(--panel)' }}>
+    <section className="panel" id="why-3m" ref={root} style={{ background: 'var(--panel)' }}>
       <span className="v-edge l" /><span className="v-edge r" />
       <span className="section-tag">04 — Why 3M</span>
       <div className="inner">

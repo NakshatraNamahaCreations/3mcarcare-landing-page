@@ -7,7 +7,7 @@ import styles from './Navbar.module.css';
 const LINKS = [
   { id: 'studios', label: 'Studios' },
   { id: 'services', label: 'Services' },
-  { id: 'why', label: 'Why 3M' },
+  { id: 'why-3m', label: 'Why 3M' },
   { id: 'gallery', label: 'Gallery' },
   { id: 'faq', label: 'FAQ' },
   { id: 'contact', label: 'Contact' }
