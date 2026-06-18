@@ -1,0 +1,34 @@
+.footer{background:var(--panel);border-top:1px solid var(--line);position:relative}
+.cta{text-align:center;padding:5rem clamp(1.2rem,4vw,3.5rem) 4rem;border-bottom:1px solid var(--line)}
+.ctaTitle{font-size:clamp(2.2rem,5vw,4rem);margin-bottom:1rem}
+.cta p{color:var(--muted);max-width:520px;margin:0 auto 2rem;line-height:1.7}
+.main{max-width:1320px;margin:0 auto;padding:4rem clamp(1.2rem,4vw,3.5rem);display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:3rem}
+.col h5{font-size:.74rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:1.4rem}
+.brand .logo{display:inline-block;margin-bottom:1.2rem;line-height:0}
+.brand .logo img{height:56px;width:auto;display:block}
+.brand p{color:var(--muted);line-height:1.7;font-size:.92rem;max-width:340px}
+.socials{display:flex;gap:.8rem;margin-top:1.6rem}
+.socials a{width:44px;height:44px;border:1px solid var(--line);border-radius:50%;display:grid;place-items:center;color:rgba(244,241,234,.7);transition:.4s var(--ease);font-size:.7rem;letter-spacing:.05em}
+.socials a:hover{background:var(--red);border-color:var(--red);color:#fff;transform:translateY(-3px)}
+.col ul{list-style:none}
+.col ul li{margin-bottom:.8rem}
+.col ul li a{color:rgba(244,241,234,.72);font-size:.92rem;transition:.3s}
+.col ul li a:hover{color:var(--gold);padding-left:6px}
+.bottom{border-top:1px solid var(--line);padding:1.6rem clamp(1.2rem,4vw,3.5rem);display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;font-size:.78rem;color:var(--muted)}
+@media(max-width:980px){.main{grid-template-columns:1fr 1fr}}
+@media(max-width:620px){
+  .main{grid-template-columns:1fr;padding:3rem clamp(1rem,5vw,1.4rem);gap:2rem}
+  .cta{padding:3.2rem clamp(1rem,5vw,1.4rem) 2.6rem}
+  .ctaTitle{font-size:clamp(1.55rem,6.6vw,2.2rem);line-height:1.18;letter-spacing:-.015em;margin-bottom:.8rem}
+  .cta p{font-size:.9rem;line-height:1.6;margin-bottom:1.6rem}
+  .bottom{padding:1.3rem clamp(1rem,5vw,1.4rem);flex-direction:column;align-items:center;text-align:center;gap:.5rem;font-size:.72rem}
+  .brand p{max-width:none;font-size:.9rem}
+  .brand .logo img{height:44px}
+  .col h5{margin-bottom:1.1rem}
+  .col ul li{margin-bottom:.7rem}
+  .col ul li a{font-size:.9rem}
+  .socials a{width:40px;height:40px}
+}
+@media(max-width:380px){
+  .ctaTitle{font-size:1.45rem}
+}

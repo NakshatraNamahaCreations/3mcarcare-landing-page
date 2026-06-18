@@ -1,0 +1,18 @@
+.loader{position:fixed;inset:0;z-index:11000;background:var(--black);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:1.6rem;padding:1rem;overflow:hidden}
+.lwrap{display:flex;flex-direction:column;align-items:center;gap:1.4rem;width:100%;max-width:560px}
+.brand{height:clamp(48px,9vw,110px);width:auto;max-width:min(420px,80vw);object-fit:contain;display:block;will-change:transform,opacity}
+
+/* Preloader car — slides in from the right under the wordmark */
+.preCarWrap{position:relative;width:min(580px,72vw);aspect-ratio:16/9;display:grid;place-items:center;overflow:hidden}
+.preCar{width:100%;height:100%;object-fit:contain;will-change:transform,opacity;filter:drop-shadow(0 30px 60px rgba(0,0,0,.6))}
+.preGlow{position:absolute;width:80%;height:30%;left:10%;bottom:8%;background:radial-gradient(ellipse,rgba(228,0,43,.35),transparent 70%);filter:blur(30px);z-index:-1}
+
+.lbar{width:min(280px,60vw);height:1px;background:var(--line);position:relative;overflow:hidden}
+.lbar i{position:absolute;inset:0;background:linear-gradient(90deg,var(--red),var(--gold));transform:scaleX(0);transform-origin:left}
+
+@media(max-width:480px){
+  .loader{gap:1rem;padding:.6rem}
+  .lwrap{gap:1rem}
+  .brand{height:44px;max-width:78vw}
+  .preCarWrap{width:78vw;aspect-ratio:16/10}
+}

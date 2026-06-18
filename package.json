@@ -1,0 +1,20 @@
+{
+  "name": "3m-carcare",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@gsap/react": "^2.1.1",
+    "gsap": "^3.12.5",
+    "lenis": "^1.3.23",
+    "next": "^14.2.33",
+    "nodemailer": "^9.0.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  }
+}

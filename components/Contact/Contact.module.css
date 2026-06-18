@@ -1,0 +1,125 @@
+.head{text-align:center;max-width:680px;margin:0 auto}
+.title{font-size:clamp(2.4rem,5vw,4.2rem);margin-top:1rem}
+.it{font-style:italic;color:var(--gold)}
+.intro{margin-top:1.1rem;color:var(--muted);font-size:.95rem;line-height:1.65}
+
+.card{
+  position:relative;
+  max-width:1080px;margin:3.5rem auto 0;
+  display:grid;grid-template-columns:1.15fr 1fr;gap:0;
+  background:linear-gradient(180deg,var(--panel) 0%,var(--panel-2) 100%);
+  border:1px solid var(--line);border-radius:10px;
+  overflow:hidden;
+  box-shadow:0 30px 80px rgba(0,0,0,.4);
+  will-change:transform,opacity;
+}
+.card::before{
+  content:"";position:absolute;left:0;top:0;height:1px;width:80px;
+  background:linear-gradient(90deg,var(--red),transparent);z-index:2;
+}
+
+.num{
+  position:absolute;top:-.4rem;right:.6rem;
+  font-family:var(--font-display);font-size:clamp(7rem,12vw,11rem);font-weight:600;
+  color:transparent;-webkit-text-stroke:1px rgba(228,0,43,.18);
+  line-height:1;pointer-events:none;letter-spacing:-.02em;
+}
+
+.left{padding:clamp(2rem,4vw,3.2rem);position:relative;z-index:1}
+.right{
+  padding:clamp(2rem,4vw,3.2rem);
+  border-left:1px solid var(--line);
+  background:rgba(255,255,255,.012);
+  display:flex;flex-direction:column;justify-content:space-between;gap:2.2rem;
+}
+
+.kicker{
+  font-size:.66rem;letter-spacing:.32em;text-transform:uppercase;
+  color:var(--gold);font-weight:500;
+}
+.name{
+  font-size:clamp(1.8rem,3.4vw,2.6rem);
+  margin-top:.7rem;line-height:1.05;
+}
+
+.info{margin-top:1.8rem;display:flex;flex-direction:column;gap:1rem}
+.line{
+  display:flex;align-items:flex-start;gap:.9rem;
+  color:rgba(244,241,234,.82);font-size:.93rem;line-height:1.55;
+  transition:color .3s var(--ease);
+}
+a.line:hover{color:var(--cream)}
+.icon{
+  flex:0 0 auto;width:30px;height:30px;border-radius:50%;
+  display:inline-flex;align-items:center;justify-content:center;
+  background:rgba(228,0,43,.08);border:1px solid rgba(228,0,43,.18);
+  color:var(--gold);margin-top:1px;
+  transition:.3s var(--ease);
+}
+a.line:hover .icon{background:rgba(228,0,43,.18);color:#fff;border-color:var(--red)}
+.email{word-break:break-all}
+
+.mapWrap{
+  position:relative;flex:1;min-height:240px;
+  border:1px solid var(--line);border-radius:6px;overflow:hidden;
+}
+.map{width:100%;height:100%;border:0;display:block}
+.mapVeil{
+  position:absolute;inset:0;pointer-events:none;will-change:opacity;
+  backdrop-filter:grayscale(1) invert(.92) contrast(.85);
+  -webkit-backdrop-filter:grayscale(1) invert(.92) contrast(.85);
+  transition:opacity .5s var(--ease);
+}
+.card:hover .mapVeil{opacity:0}
+
+.actions{display:flex;flex-direction:column;gap:.7rem}
+.primaryBtn,
+.ghostBtn{
+  display:inline-flex;align-items:center;justify-content:center;gap:.7rem;
+  padding:.95rem 1.4rem;border-radius:50px;
+  font-size:.76rem;letter-spacing:.18em;text-transform:uppercase;font-weight:500;
+  transition:.4s var(--ease);position:relative;overflow:hidden;
+}
+.primaryBtn{background:var(--red);color:#fff}
+.primaryBtn::before{content:"";position:absolute;inset:0;background:var(--black);transform:translateX(-101%);transition:transform .5s var(--ease);z-index:1}
+.primaryBtn:hover::before{transform:translateX(0)}
+.primaryBtn:hover{transform:translateY(-2px)}
+.primaryBtn > *{position:relative;z-index:2}
+.arr{
+  width:14px;height:14px;display:inline-block;
+  border-top:1.5px solid currentColor;border-right:1.5px solid currentColor;
+  transform:rotate(45deg);
+}
+
+.ghostBtn{
+  background:transparent;color:var(--cream);
+  border:1px solid var(--line);
+}
+.ghostBtn:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-2px)}
+
+@media(max-width:880px){
+  .card{grid-template-columns:1fr}
+  .right{border-left:0;border-top:1px solid var(--line)}
+  .num{font-size:7rem;right:1rem;top:-.2rem}
+}
+@media(max-width:620px){
+  .title{font-size:clamp(1.55rem,6.6vw,2.2rem);line-height:1.18;letter-spacing:-.015em}
+  .intro{font-size:.9rem;line-height:1.6}
+}
+@media(max-width:520px){
+  .num{font-size:4.5rem;right:.6rem;top:.2rem}
+  .left,.right{padding:1.4rem 1.1rem}
+  .name{font-size:1.4rem;line-height:1.15}
+  .kicker{font-size:.6rem;letter-spacing:.26em}
+  .info{margin-top:1.4rem;gap:.85rem}
+  .line{font-size:.88rem;line-height:1.5}
+  .icon{width:26px;height:26px}
+  .mapWrap{min-height:180px}
+  .right{gap:1.4rem}
+  .primaryBtn,.ghostBtn{padding:.85rem 1rem;font-size:.7rem;letter-spacing:.14em}
+}
+@media(max-width:380px){
+  .title{font-size:1.45rem}
+  .name{font-size:1.25rem}
+  .num{font-size:3.8rem}
+}

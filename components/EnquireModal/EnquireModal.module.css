@@ -1,0 +1,170 @@
+.overlay{
+  position:fixed;inset:0;z-index:10000;
+  display:flex;align-items:center;justify-content:center;
+  padding:clamp(1rem,4vw,2.5rem);
+  background:rgba(4,4,6,.72);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  visibility:hidden;opacity:0;
+}
+
+.card{
+  position:relative;
+  width:100%;max-width:640px;
+  background:linear-gradient(180deg,var(--panel) 0%,var(--panel-2) 100%);
+  border:1px solid var(--line);border-radius:10px;
+  padding:clamp(1.3rem,2.6vw,2rem);
+  box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 0 1px rgba(228,0,43,.06);
+  will-change:transform,opacity;
+}
+.card::before{
+  content:"";position:absolute;left:0;top:0;width:60px;height:1px;
+  background:linear-gradient(90deg,var(--red),transparent);
+}
+
+.close{
+  position:absolute;top:.6rem;right:.6rem;
+  width:40px;height:40px;border-radius:50%;
+  background:transparent;border:1px solid var(--line);
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  transition:.3s var(--ease);z-index:2;
+}
+.close:hover{border-color:var(--red);transform:rotate(90deg)}
+.close span{position:absolute;width:11px;height:1.5px;background:var(--cream);transition:background .3s}
+.close span:nth-child(1){transform:rotate(45deg)}
+.close span:nth-child(2){transform:rotate(-45deg)}
+.close:hover span{background:var(--red)}
+
+.head{margin-bottom:1.1rem}
+.title{font-size:clamp(1.4rem,2.6vw,1.9rem);margin-top:.55rem;line-height:1.05}
+.it{font-style:italic;color:var(--red)}
+.sub{margin-top:.5rem;color:var(--muted);font-size:.88rem;line-height:1.5;max-width:42ch}
+
+.form{display:flex;flex-direction:column;gap:.75rem}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:.9rem}
+
+.field{display:flex;flex-direction:column;gap:.3rem}
+.field > span{
+  font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--gold);font-weight:500;
+}
+.field > span em{font-style:normal;color:var(--muted);font-weight:300;text-transform:none;letter-spacing:.02em;margin-left:.4rem}
+
+.field input,
+.field select,
+.field textarea,
+.selectTrigger{
+  width:100%;
+  background:rgba(255,255,255,.025);
+  border:1px solid var(--line);border-radius:4px;
+  padding:.75rem .85rem;
+  color:var(--cream);font-family:var(--font-body);font-size:.88rem;
+  transition:.3s var(--ease);
+  outline:none;
+}
+.field input::placeholder,
+.field textarea::placeholder{color:rgba(244,241,234,.32)}
+.field input:focus,
+.field select:focus,
+.field textarea:focus,
+.selectTrigger:focus,
+.selectWrap[data-open="true"] .selectTrigger{
+  border-color:var(--red);
+  background:rgba(228,0,43,.04);
+}
+.field input.invalid,
+.field textarea.invalid{
+  border-color:#ff4d6a;
+  background:rgba(255,77,106,.06);
+}
+.err{
+  color:#ff6b80;
+  font-size:.7rem;letter-spacing:.02em;
+  margin-top:.05rem;line-height:1.3;
+}
+.field textarea{resize:none;min-height:54px;font-family:var(--font-body)}
+.field select{appearance:none;-webkit-appearance:none;cursor:pointer;
+  background-image:linear-gradient(45deg,transparent 50%,var(--gold) 50%),linear-gradient(135deg,var(--gold) 50%,transparent 50%);
+  background-position:calc(100% - 18px) 50%,calc(100% - 13px) 50%;
+  background-size:5px 5px,5px 5px;background-repeat:no-repeat;
+  padding-right:2.4rem;
+}
+.field select.placeholder{color:rgba(244,241,234,.32)}
+.field select option{background:var(--panel);color:var(--cream)}
+.field select option[disabled]{color:rgba(244,241,234,.4)}
+
+/* Custom service-select dropdown — always opens downward, full visual control. */
+.selectWrap{position:relative;width:100%}
+.selectTrigger{
+  display:flex;align-items:center;justify-content:space-between;gap:.5rem;
+  text-align:left;cursor:pointer;
+}
+.selectTrigger.placeholder .selectValue{color:rgba(244,241,234,.32)}
+.selectTrigger.invalid{
+  border-color:#ff4d6a;
+  background:rgba(255,77,106,.06);
+}
+.selectValue{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.caret{
+  flex:0 0 auto;width:8px;height:8px;display:inline-block;
+  border-right:1.5px solid var(--gold);border-bottom:1.5px solid var(--gold);
+  transform:rotate(45deg) translate(-2px,-2px);
+  transition:transform .25s var(--ease);
+}
+.caretOpen{transform:rotate(-135deg) translate(-2px,-2px)}
+
+.selectMenu{
+  position:absolute;left:0;right:0;top:calc(100% + 6px);z-index:5;
+  list-style:none;margin:0;padding:.3rem 0;
+  background:var(--panel);
+  border:1px solid var(--line);border-radius:4px;
+  box-shadow:0 20px 40px rgba(0,0,0,.55);
+  overflow-y:auto;
+  animation:selectIn .18s var(--ease);
+}
+.selectMenuUp{
+  top:auto;bottom:calc(100% + 6px);
+  box-shadow:0 -20px 40px rgba(0,0,0,.55);
+  animation:selectInUp .18s var(--ease);
+}
+@keyframes selectIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:translateY(0)}}
+@keyframes selectInUp{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+.selectOption{
+  padding:.6rem .85rem;
+  font-size:.88rem;color:var(--cream);
+  cursor:pointer;
+  transition:background .15s var(--ease),color .15s var(--ease);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.selectOptionActive{background:rgba(228,0,43,.14);color:#fff}
+.selectOptionSelected{color:var(--gold)}
+.selectOptionSelected.selectOptionActive{background:rgba(228,0,43,.2);color:#fff}
+/* scrollbar styling inside the menu */
+.selectMenu::-webkit-scrollbar{width:6px}
+.selectMenu::-webkit-scrollbar-track{background:transparent}
+.selectMenu::-webkit-scrollbar-thumb{background:rgba(255,255,255,.08);border-radius:3px}
+
+.submit{margin-top:.35rem;align-self:flex-start;padding:.8rem 1.8rem;font-size:.74rem}
+.submit .arr{width:14px;height:14px}
+.submit:disabled{opacity:.65;cursor:not-allowed;pointer-events:none}
+
+.serverErr{
+  padding:.6rem .85rem;border-radius:4px;
+  background:rgba(255,77,106,.08);border:1px solid rgba(255,77,106,.3);
+  color:#ff8093;font-size:.78rem;line-height:1.45;
+}
+
+@media(max-width:560px){
+  .row{grid-template-columns:1fr;gap:.7rem}
+  .card{padding:1.4rem 1rem;border-radius:8px;max-height:90vh;overflow-y:auto}
+  .title{font-size:1.4rem;line-height:1.15}
+  .overlay{padding:.6rem;align-items:flex-start;padding-top:1.2rem}
+  .submit{align-self:stretch;justify-content:center;padding:.95rem 1.2rem}
+  .selectOption{padding:.75rem .85rem;font-size:.92rem}
+  .close{width:36px;height:36px;top:.5rem;right:.5rem}
+  .form{gap:.65rem}
+  .field input,.field textarea,.selectTrigger{padding:.7rem .75rem}
+}
+@media(max-width:380px){
+  .card{padding:1.2rem .9rem}
+  .title{font-size:1.3rem}
+}

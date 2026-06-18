@@ -1,0 +1,45 @@
+.wrap{display:grid;grid-template-columns:.8fr 1.2fr;gap:4rem;align-items:start}
+.titleStack{position:relative;margin-top:1rem}
+.title{font-size:clamp(2.4rem,3.5vw,3.5rem)}
+.titleA{position:relative}
+.titleB{position:absolute;inset:0;opacity:0;transform:translateY(60%)}
+.it{font-style:italic;color:var(--gold)}
+.list{display:flex;flex-direction:column}
+.item{border-bottom:1px solid var(--line);will-change:transform,opacity}
+.q{display:flex;justify-content:space-between;gap:1.4rem;align-items:center;padding:1.5rem 0;cursor:pointer;width:100%;background:none;border:0;text-align:left}
+.q h4{font-size:1.35rem;font-weight:500;font-family:var(--font-display);color:var(--cream);transition:color .35s}
+.item:hover .q h4{color:var(--gold)}
+.pm{flex:none;width:38px;height:38px;border:1px solid var(--line);border-radius:50%;position:relative;transition:.4s}
+.pm::before,.pm::after{content:"";position:absolute;background:var(--gold);left:50%;top:50%;transition:.4s var(--ease)}
+.pm::before{width:11px;height:1.4px;transform:translate(-50%,-50%)}
+.pm::after{width:1.4px;height:11px;transform:translate(-50%,-50%)}
+.active .pm{background:var(--red);border-color:var(--red)}
+.active .pm::before,.active .pm::after{background:#fff}
+.active .pm::after{transform:translate(-50%,-50%) scaleY(0)}
+.a{display:grid;grid-template-rows:0fr;transition:grid-template-rows .5s var(--ease)}
+.a > div{overflow:hidden}
+.active .a{grid-template-rows:1fr}
+.a p{padding:0 0 1.6rem;color:rgba(244,241,234,.7);line-height:1.7;max-width:560px}
+.active .a p{padding-top:.1rem}
+
+.maskTop{transform:translateY(0)}
+.maskBot{transform:translateY(100%)}
+
+@media(max-width:980px){
+  .wrap{grid-template-columns:1fr;gap:2.5rem}
+  .titleB{display:none}
+}
+@media(max-width:620px){
+  .title{font-size:clamp(1.55rem,6.6vw,2.2rem);line-height:1.18;letter-spacing:-.015em}
+  .q{padding:1.1rem 0;gap:.8rem}
+  .q h4{font-size:1rem;line-height:1.3;font-weight:500}
+  .pm{width:32px;height:32px}
+  .pm::before{width:9px}
+  .pm::after{height:9px}
+  .a p{font-size:.9rem;line-height:1.65}
+  .wrap{gap:1.8rem}
+}
+@media(max-width:380px){
+  .title{font-size:1.4rem}
+  .q h4{font-size:.95rem}
+}

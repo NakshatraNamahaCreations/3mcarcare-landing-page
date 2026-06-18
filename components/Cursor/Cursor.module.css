@@ -1,0 +1,5 @@
+.cursor,.cursorD{position:fixed;top:0;left:0;border-radius:50%;pointer-events:none;z-index:10000;mix-blend-mode:difference;will-change:transform}
+.cursor{width:7px;height:7px;background:#fff;transform:translate(-50%,-50%)}
+.cursorD{width:38px;height:38px;border:1px solid rgba(255,255,255,.5);transform:translate(-50%,-50%);transition:width .3s,height .3s,border-color .3s}
+.hover{width:64px!important;height:64px!important;border-color:var(--red)!important}
+@media (hover:none){.cursor,.cursorD{display:none}}

@@ -1,0 +1,159 @@
+.wrap{
+  position:relative;
+  min-height:100vh;min-height:100dvh;
+  display:flex;align-items:center;justify-content:center;
+  padding:clamp(2rem,6vw,4rem) clamp(1.2rem,4vw,3.5rem);
+  background:var(--black);
+  overflow:hidden;
+  isolation:isolate;
+}
+
+/* Soft red radial glow behind content */
+.glow{
+  position:absolute;left:50%;top:42%;
+  width:70vw;height:70vw;max-width:900px;max-height:900px;
+  transform:translate(-50%,-50%);
+  background:radial-gradient(circle,rgba(228,0,43,.22),transparent 62%);
+  filter:blur(50px);
+  z-index:1;pointer-events:none;
+}
+
+/* Vignette + bottom fade to the page black */
+.vignette{
+  position:absolute;inset:0;z-index:2;pointer-events:none;
+  background:
+    radial-gradient(120% 90% at 50% 30%,transparent 30%,rgba(8,8,10,.85) 100%),
+    linear-gradient(180deg,rgba(8,8,10,.55) 0%,transparent 25%,transparent 60%,var(--black) 100%);
+}
+
+/* Decorative vertical hairlines, same vocabulary as the hero */
+.hairlines{position:absolute;inset:0;z-index:3;pointer-events:none}
+.hairlines > i{
+  position:absolute;display:block;width:1px;
+  background:linear-gradient(180deg,transparent,var(--gold),transparent);
+  opacity:.32;
+}
+
+/* Centered cinematic content column */
+.content{
+  position:relative;z-index:5;
+  width:100%;max-width:880px;margin:0 auto;
+  text-align:center;
+}
+
+/* Success mark — thin red rings with a check */
+.mark{
+  width:clamp(64px,7vw,88px);height:clamp(64px,7vw,88px);
+  margin:0 auto 1.6rem;
+  color:var(--red);
+  filter:drop-shadow(0 0 24px rgba(228,0,43,.35));
+  opacity:0;transform:scale(.6);will-change:transform,opacity;
+}
+
+.eyebrow{opacity:0;transform:translateY(20px);will-change:transform,opacity}
+
+.title{
+  font-size:clamp(2.4rem,6vw,5rem);
+  font-weight:500;letter-spacing:-.02em;line-height:1.02;
+  margin:1.4rem 0 1.5rem;
+}
+.it{font-style:italic;color:var(--red)}
+.line{display:block;overflow:hidden}
+.line > span{display:inline-block;transform:translateY(105%);will-change:transform}
+
+.sub{
+  font-size:clamp(.95rem,1.3vw,1.1rem);
+  color:rgba(244,241,234,.78);font-weight:300;
+  max-width:54ch;margin:0 auto 2.4rem;line-height:1.7;
+  opacity:0;transform:translateY(24px);will-change:transform,opacity;
+}
+.sub strong{color:var(--cream);font-weight:500}
+
+/* CTA row */
+.ctas{
+  display:flex;flex-wrap:wrap;justify-content:center;
+  gap:.9rem 1.1rem;margin-bottom:3rem;
+}
+.ctas > *{opacity:0;transform:translateY(22px);will-change:transform,opacity}
+.cta{padding:1rem 2rem;font-size:.76rem}
+
+/* Ghost (outline) secondary CTA */
+.ctaGhost{
+  display:inline-flex;align-items:center;justify-content:center;
+  padding:1rem 1.8rem;
+  font-size:.76rem;letter-spacing:.18em;text-transform:uppercase;font-weight:500;
+  color:var(--cream);
+  border:1px solid var(--line);border-radius:50px;
+  background:transparent;
+  transition:border-color .35s var(--ease),color .35s var(--ease),background .35s var(--ease),transform .4s var(--ease);
+  cursor:pointer;
+}
+.ctaGhost:hover{
+  border-color:var(--red);
+  color:#fff;
+  background:rgba(228,0,43,.08);
+  transform:translateY(-3px);
+}
+
+/* Meta strip — three quiet contact rows separated by hairlines */
+.meta{
+  list-style:none;margin:0 auto;padding:0;
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:0;
+  max-width:760px;
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+}
+.meta > li{
+  padding:1rem .9rem;
+  display:flex;flex-direction:column;gap:.3rem;align-items:center;
+  font-size:.78rem;color:var(--muted);
+  position:relative;
+  opacity:0;transform:translateY(14px);will-change:transform,opacity;
+}
+.meta > li + li::before{
+  content:"";position:absolute;left:0;top:18%;bottom:18%;width:1px;
+  background:var(--line);
+}
+.meta > li > span{
+  font-size:.6rem;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--gold);font-weight:500;
+}
+.meta > li > a{
+  color:var(--cream);font-size:.85rem;
+  transition:color .25s var(--ease);
+  word-break:break-word;
+}
+.meta > li > a:hover{color:var(--red)}
+
+/* Corner brand watermark */
+.brand{
+  position:absolute;left:50%;bottom:1.6rem;transform:translateX(-50%);
+  z-index:4;
+  font-size:.62rem;letter-spacing:.42em;text-transform:uppercase;
+  color:rgba(255,255,255,.32);
+  white-space:nowrap;
+  opacity:0;will-change:opacity;
+}
+
+@media(max-width:760px){
+  .wrap{padding:5rem 1.1rem 4rem}
+  .title{font-size:clamp(1.9rem,7vw,2.6rem);margin:1.1rem 0 1.1rem;line-height:1.12;letter-spacing:-.015em}
+  .sub{font-size:.95rem;margin-bottom:2rem}
+  .ctas{margin-bottom:2.2rem}
+  .cta,.ctaGhost{width:100%;max-width:340px}
+  .meta{grid-template-columns:1fr;max-width:420px}
+  .meta > li{padding:.95rem .6rem}
+  .meta > li + li::before{
+    left:18%;right:18%;top:0;bottom:auto;width:auto;height:1px;
+  }
+  .brand{font-size:.55rem;letter-spacing:.32em}
+  /* Hide busy hairline layer on small screens */
+  .hairlines{display:none}
+}
+
+@media(max-width:380px){
+  .title{font-size:1.6rem}
+  .sub{font-size:.88rem;line-height:1.6}
+  .mark{width:58px;height:58px;margin-bottom:1.2rem}
+}

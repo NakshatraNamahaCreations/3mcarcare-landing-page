@@ -1,0 +1,14 @@
+.floatBtns{
+  position:fixed;
+  right:max(1.4rem,env(safe-area-inset-right,1.4rem));
+  bottom:max(1.4rem,env(safe-area-inset-bottom,1.4rem));
+  z-index:9000;display:flex;flex-direction:column;gap:.8rem;
+}
+.floatBtns a{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;color:#fff;font-size:.62rem;letter-spacing:.05em;text-transform:uppercase;font-weight:600;box-shadow:0 10px 30px rgba(0,0,0,.5);transition:transform .35s var(--ease)}
+.floatBtns a:hover{transform:scale(1.1)}
+.wa{background:#25d366}
+.cl{background:var(--red)}
+@media(max-width:620px){
+  .floatBtns{right:1rem;bottom:max(1rem,env(safe-area-inset-bottom,1rem));gap:.6rem}
+  .floatBtns a{width:50px;height:50px}
+}
