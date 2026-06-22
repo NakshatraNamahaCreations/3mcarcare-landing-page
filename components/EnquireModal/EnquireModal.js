@@ -220,7 +220,7 @@ export default function EnquireModal({ open, onClose }) {
     setSubmitting(true);
     setServerError('');
     try {
-      const res = await fetch('/api/enquire', {
+      const res = await fetch(process.env.NEXT_PUBLIC_ENQUIRE_URL || '/api/enquire', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify(form)
