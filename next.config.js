@@ -1,10 +1,13 @@
+// STATIC_EXPORT=1 produces a static `out/` (for Hostinger).
+// Unset (e.g. on Vercel) keeps API routes alive.
+const isStaticExport = process.env.STATIC_EXPORT === '1';
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',
-  trailingSlash: true,
+  ...(isStaticExport ? { output: 'export', trailingSlash: true } : {}),
   reactStrictMode: false,
   images: {
-    unoptimized: true,
+    unoptimized: isStaticExport,
     remotePatterns: [
       { protocol: 'https', hostname: '3mcarcarebangalore.com' }
     ]
