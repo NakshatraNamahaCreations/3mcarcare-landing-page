@@ -5,15 +5,39 @@ export const runtime = 'nodejs';
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 const PHONE_RE = /^[6-9]\d{9}$/;
 
+const ALLOWED_ORIGINS = new Set([
+  'https://3mcarcarestudios.in',
+  'https://www.3mcarcarestudios.in'
+]);
+
+const corsHeaders = (origin) => {
+  const allow = ALLOWED_ORIGINS.has(origin) ? origin : 'https://3mcarcarestudios.in';
+  return {
+    'Access-Control-Allow-Origin': allow,
+    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type, Accept',
+    'Access-Control-Max-Age': '86400',
+    Vary: 'Origin'
+  };
+};
+
+const json = (origin, body, status = 200) =>
+  Response.json(body, { status, headers: corsHeaders(origin) });
+
+export async function OPTIONS(req) {
+  return new Response(null, { status: 204, headers: corsHeaders(req.headers.get('origin')) });
+}
+
 const esc = (s = '') =>
   String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
 export async function POST(req) {
+  const origin = req.headers.get('origin');
   let body;
   try {
     body = await req.json();
   } catch {
-    return Response.json({ error: 'Invalid request body.' }, { status: 400 });
+    return json(origin, { error: 'Invalid request body.' }, 400);
   }
 
   const name = (body.name || '').trim();
@@ -22,11 +46,11 @@ export async function POST(req) {
   const service = (body.service || '').trim();
   const message = (body.message || '').trim();
 
-  if (!name) return Response.json({ error: 'Name is required.' }, { status: 400 });
-  if (!PHONE_RE.test(phone)) return Response.json({ error: 'Invalid phone number.' }, { status: 400 });
-  if (!EMAIL_RE.test(email)) return Response.json({ error: 'Invalid email address.' }, { status: 400 });
-  if (!service) return Response.json({ error: 'Service is required.' }, { status: 400 });
-  if (message.length > 2000) return Response.json({ error: 'Message too long.' }, { status: 400 });
+  if (!name) return json(origin, { error: 'Name is required.' }, 400);
+  if (!PHONE_RE.test(phone)) return json(origin, { error: 'Invalid phone number.' }, 400);
+  if (!EMAIL_RE.test(email)) return json(origin, { error: 'Invalid email address.' }, 400);
+  if (!service) return json(origin, { error: 'Service is required.' }, 400);
+  if (message.length > 2000) return json(origin, { error: 'Message too long.' }, 400);
 
   const {
     SMTP_HOST = 'smtp.hostinger.com',
@@ -47,7 +71,7 @@ export async function POST(req) {
     NODE_ENV === 'production';
   if (!SMTP_USER || !SMTP_PASS) {
     console.error('[enquire] Missing SMTP_USER or SMTP_PASS environment variables.');
-    return Response.json({ error: 'Mail service is not configured.' }, { status: 500 });
+    return json(origin, { error: 'Mail service is not configured.' }, 500);
   }
 
   const port = Number(SMTP_PORT);
@@ -81,14 +105,7 @@ try {
     message: err.message
   });
 
-  return Response.json(
-    {
-      error: "SMTP connection failed"
-    },
-    {
-      status:500
-    }
-  );
+  return json(origin, { error: 'SMTP connection failed' }, 500);
 }
 
   const recipient = MAIL_TO || SMTP_USER;
@@ -132,7 +149,7 @@ ${message || '(none)'}
     });
   } catch (err) {
     console.error('[enquire] sendMail failed:', err);
-    return Response.json({ error: 'Could not send your enquiry. Please try again or call us.' }, { status: 502 });
+    return json(origin, { error: 'Could not send your enquiry. Please try again or call us.' }, 502);
   }
 
   const replyText = `Hi ${name},
@@ -204,5 +221,5 @@ Here's a copy of what you sent:
     console.log(`[enquire] auto-reply skipped for ${email} (ENQUIRE_AUTO_REPLY disabled)`);
   }
 
-  return Response.json({ ok: true });
+  return json(origin, { ok: true });
 }
